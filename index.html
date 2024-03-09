@@ -6,14 +6,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <title>NewTab</title> 
+    <style>
+        body{
+            background-image: url(./img/backGround.jpg);
+            background-size: cover;
+            height: 100vh;
+            backdrop-filter: blur(3px);
+        }
+    </style>
 </head>
 <body>
     <!-- Live On https://srirammaddibhatla9821.github.io/googleNewtab/ -->
-    <!-- Dynamic Title has to be done -->
     <div class="container">
-        <div class="row d-flex justify-content-center p-5 m-5">
-            <div class="col-3"></div>
-            <div class="col-9">
+        <div class="row d-flex justify-content-between">
+            <div class="col-3 py-5 text-light">
+                <div align="center" class="date display-1" id="date"></div>
+                <div align="center" class="time lead" id="time"></div>
+            </div>
+            <div class="col-8 py-5 my-5">
                 <form action="https://www.google.com/search" method="GET">
                     <!-- <input type="text" name="q" placeholder="SearchEngine"><input type="submit" value="googleSearch"> -->
                     <div class="input-group mb-3">
@@ -21,8 +31,25 @@
                         <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
                       </div>
                 </form>
+                <div class="row"></div>
             </div>
         </div>
     </div>
+
+    <script>
+        let funUpdateDateTime = () => {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                let day = now.getDate().toString().padStart(2, '0');
+                let mnYr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+                let weekDay = now.toLocaleDateString('en-US', { weekday: 'long' });
+                let date = document.getElementById("date");
+                date.innerHTML = `${day}<br/><p class="lead">${mnYr}</br>${weekDay}</p>`;
+                const timeString = now.toLocaleTimeString('en-US');
+                const currentTimeElement = document.getElementById('time');
+                currentTimeElement.innerHTML = `<b>${timeString}</b>`;
+            }
+            setInterval(funUpdateDateTime, 1000);
+    </script>
 </body>
 </html>
